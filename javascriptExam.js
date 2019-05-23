@@ -64,3 +64,15 @@ carArray.map(car => {
 
 let deletArray = ["cata", "pipe", "dani", "cristian"]
 console.log(deletArray.splice(2,3))
+
+
+// MAP examples
+ let array = [1, 2, 3];
+
+// The new array has the same number of elements as the original array
+// BUT each element is mapped to the value*2
+
+// ES5:
+let newArray = array.map(function(number){
+  return number * 2;
+})

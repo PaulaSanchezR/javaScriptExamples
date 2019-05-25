@@ -96,3 +96,33 @@ function highAndLow(numbers){
   let both =+  maxNumber.toString()+ " "+ minNumber.toString()
   return both
 }
+
+//find the vowels on the string
+
+function vowels(newvowel){
+  
+  let count = 0;
+  for(i = 0; i <= newvowel; i++){
+    console.log(newvowel[i])
+     switch(newvowel[i]){
+       case "a":
+        count += 1;
+        break;
+       case "e":
+        count += 1;
+        break;
+       case "i":
+        count += 1;
+        break;
+       case "o": 
+        count += 1;
+        break;
+       case "u":
+       count += 1;
+       break;
+    }
+  }
+  return count;
+}
+
+vowels("paula")

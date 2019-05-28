@@ -97,6 +97,7 @@ function highAndLow(numbers){
   return both
 }
 
+//**********NOT WORKING******** */
 //find the vowels on the string
 
 function vowels(newvowel){
@@ -126,3 +127,39 @@ function vowels(newvowel){
 }
 
 vowels("paula")
+
+
+
+
+//Given two integers a and b, 
+//which can be positive or negative, 
+//find the sum of all the numbers between 
+//including them too and return it. 
+//If the two numbers are equal return a or b.
+
+//test 
+// GetSum(1, 0) == 1   // 1 + 0 = 1
+// GetSum(1, 2) == 3   // 1 + 2 = 3
+// GetSum(0, 1) == 1   // 0 + 1 = 1
+// GetSum(1, 1) == 1   // 1 Since both are same
+// GetSum(-1, 0) == -1 // -1 + 0 = -1
+// GetSum(-1, 2) == 2  // -1 + 0 + 1 + 2 = 2
+
+function GetSum(a,b){
+  let sum =[];
+  if(a === b){
+   return a;
+  }
+  else if( a > b){
+     for(i= b ; i <= a ; i++){
+        sum.push(i)
+    } 
+    return sum.reduce(function (c,d) {return c + d})
+  }
+  else {
+     for(i= a ; i <= b ; i++){
+          sum.push(i)
+      }
+    return sum.reduce(function (c,d) {return c + d})
+  }
+  }

@@ -227,12 +227,12 @@ Object.keys(obj)
     o => o['active']
   ); // 'pebbles'
 
+/*______________________________________________________________
+|           DATA STRUCTURE STACKS
+|           POLINDROME
+|     
+|_______________________________________________________________*/
 
-
-  /**STACKS
-   * 
-   *  POLINDROME
-   */
   
    function checkPolindromeWord(word){
      if (word.length == 0){
@@ -293,3 +293,192 @@ Object.keys(obj)
  console.log(myStack.peek()); //2
  console.log(myStack.pop());  //2
  console.log(myStack.peek()); //1
+/*______________________________________________________________
+|           SET DATA STRUCTURE 
+|           FIRST IN FIRST OUT
+|     IT IS LIKE AN ARRAY EXPECT NO DUPLICATE ITEMS 
+|     ITEM ARE IN NOT PARTICULAR ORDER
+|     Particular use of Set: check for a present of and item
+|     IIE 6 does not content all the methods of set
+|_______________________________________________________________*/
+
+ 
+ function mySet(){
+   //holde the set
+   let collection=[];
+   //if the item is not in  the collection will return -1
+   this.has = function(element){
+     //if the element is not on the collection it will return -1 
+     return (collection.indexOf(element) !== -1);
+   }
+   // this method will return all the values of the set
+   this.values = function(){
+     return collection;
+   };
+   // this method will add an element to the set
+    this.add = function(element){
+      if(!this.has(element)){
+        collection.push(element);
+        return true;
+      }
+      return false
+    };
+    //this method will remove an element from a set IIE delete()
+    this.remove = function(element){
+      if(this.has(element)){
+        // find the index of the element
+        index=collection.indexOf(element);
+        // take out the element on the array and take out 1 element
+        collection.splice(index,1);
+        return true;
+      }
+      return false
+    };
+    // this method will return the size of the collection IIE is a property
+    this.size = function(){
+      return collection.length;
+    };
+//********************************************* */    
+// no in the IIE implementation
+
+    // this method will return the union of two sets
+    //combine the set but remove the duplicates
+    this.union = function(otherSet){
+      let unionSet = new mySet();
+      let firstSet = this.values();
+      let secondSet = otherSet.value();
+      firstSet.forEach(function(e){
+        unionSet.add(e)
+      });
+      secondSet.forEach(function(e){
+        unionSet.add(e)
+      });
+      return unionSet;
+    };
+    // this method will return the intersection of two sets as a new set
+    // return a new set 
+    this.intersection = function(otherSet){
+      let intersectionSet= new mySet();
+      let firstSet = this.value();
+      firstSet.forEach(function(e){
+        if(otherSet.has(e)){
+          intersectionSet.add(e)
+        }
+      })
+      return intersectionSet;
+
+    }
+
+// this method will return the difference of the two sets as a new set
+this.difference= function(otherSet){
+  let differenceSet = new mySet();
+  let firstSet = this.value();
+  firstSet.forEach(function(e){
+    if(!otherSet.has(e)){
+       differenceSet.add(e)
+    }
+  });
+  return differenceSet;
+}
+
+//this method will test if the set is a subset of a diffrente set
+//retrun true of false
+
+this.subset = function(otherSet){
+  let firstSet = this.value();
+  //whether all the elements in the array past the test implemented
+  //by the provided function,
+  // we are going to test all the element on first test to past this funcion
+
+  return firstSet.every(function(value){
+      return otherSet.has(value)
+  });
+};
+
+ }
+
+ let setA = new mySet();
+let setB = new mySet();
+setA.add("a");
+setB.add("b");
+setB.add("c");
+setB.add("a");
+setB.add("e");
+console.log(setA.subset(setB)) // true
+console.log(set)
+
+/*______________________________________________________________
+|           BINARY SEARCH TREE DATA STRUCTURE 
+|          IS A WAY TO HOLD DATA WHEN VISUALIZE LOOK LIKE A TREE
+|    ALL DATA POINT ON THE TREE ARE CALL NODES
+|    THE TOP THE TREE IS THE ROOT AND FROM THERE IT BRANCHS OUT INTO 
+|    ADDITIONAL NODES EACH OF MAY HAVE MORE NODES
+|    LEAF NODE ARE NODES AT THE END OF THE TREE HAS NOT CHILDREN
+|    ALSO EVERY CHILDREN HAS PARENT
+|
+|    A BINARY TREE CAN ONLY HAVE TWO BRANCES POR EVERY NODE
+|    AND ALSO ARE ORDER EACH LEFTSUBTREE IS LESS OR EQUAL TO THE PARENT 
+|    AND EACH RITHSUBTREE IS GREATER OR EQUAL TO THE PARENT NODE
+|                           50
+|                         /    \
+|                       17      72  --> Left subtree is less or equal to the parent
+|                     /   \     /  \
+|                   12    23   54   76
+|                  /  \  /  \  / \ 
+|                9    14 19      67 
+|_______________________________________________________________*/
+
+// represent each node on the tree
+class Node{
+  constructor(data, left=null, right=null){
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+}
+// binary search tree BST
+class BST{
+  constructor(){
+    this.root = null;
+  }
+
+
+  add(data){
+    const node = this.root;
+    // if this is the first node
+    if(node === null){
+      this.root = new Node(data);
+      return;
+    }
+    // where to place the new node
+    //recursive function
+    else{
+      const searchTree= function(node){
+        if(data < node.data){
+            if(node.left === null){
+              node.left = new Node(data);
+              return;
+            }else if (node.left !==null){
+              return searchTree(node.left)
+            }
+          }else if(data> node.data){
+              if(node.right = new Node(data)){
+                node.right = new Node(data);
+              return;
+              }else if(node.right !== null){
+              return searchTree(node.right);
+            } 
+          }else {
+            return null;
+          }
+        }   
+      return searchTree(node)
+      }
+    }
+
+
+// findMin(){
+//https://www.youtube.com/watch?v=t2CEgPsws3U
+// }
+
+}

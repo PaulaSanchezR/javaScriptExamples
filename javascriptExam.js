@@ -482,3 +482,34 @@ class BST{
 // }
 
 }
+
+
+
+// *********************
+// Numeros primos
+
+function printPrime4(value) {
+
+    const primes = [];
+    for(let i = 2; i < value; i++) {
+
+        primes[i] = true;
+console.log("primer array", primes[i])
+    }
+    const limit = Math.sqrt(value);
+console.log("este es limit", limit)
+    for(let i = 2; i < limit; i++) {
+  console.log("segungo array" , primes[i])
+        if(primes[i] === true) {
+            for(let j = i * i; j < value; j += i) {
+console.log("tercer array", primes[j])
+                primes[j] = false;
+            }
+        }
+    }
+    for(let i = 2; i < value; i++) {
+        if(primes[i] === true) {
+            console.log(i + " " + primes[i]);
+        }
+    }
+}

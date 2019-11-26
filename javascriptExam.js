@@ -492,24 +492,45 @@ function printPrime4(value) {
 
     const primes = [];
     for(let i = 2; i < value; i++) {
-
         primes[i] = true;
-console.log("primer array", primes[i])
+      //  console.log("primer array", primes[i])
     }
     const limit = Math.sqrt(value);
-console.log("este es limit", limit)
+      // console.log("este es limit", limit)
     for(let i = 2; i < limit; i++) {
-  console.log("segungo array" , primes[i])
+      // console.log("segungo array" , primes[i])
         if(primes[i] === true) {
             for(let j = i * i; j < value; j += i) {
-console.log("tercer array", primes[j])
+      // console.log("tercer array", primes[j])
                 primes[j] = false;
             }
         }
     }
     for(let i = 2; i < value; i++) {
         if(primes[i] === true) {
-            console.log(i + " " + primes[i]);
+            // console.log(i + " " + primes[i]);
         }
     }
+}
+
+
+// Get a decimal nunber 50 conver to binary number 110010
+// return the invers number like                                 001101
+// if it is 0 you renturn 1
+// and return the decimal number after inverse it in this case is 13
+
+
+function convert(n){
+    let conver = n.toString(2).split('');
+    // console.log(conver)
+    let newArray="";
+      for (let i = 0 ; i < conver.length ; i ++){
+      // console.log(conver[i])
+              if(conver[i] == "0"){
+                   newArray += "1"
+                }else { 
+                   newArray += "0"
+                } 
+      }   
+    return parseInt(newArray.replace(/[^01]/gi,'') , 2);
 }

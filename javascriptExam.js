@@ -534,3 +534,39 @@ function convert(n){
       }   
     return parseInt(newArray.replace(/[^01]/gi,'') , 2);
 }
+
+
+//Welcome.
+
+// In this kata you are required to, given a string, replace every letter with its position in the alphabet.
+
+// If anything in the text isn't a letter, ignore it and don't return it.
+
+// "a" = 1, "b" = 2, etc.
+
+function alphabetPosition(text) {
+  let replacePosition = "";
+  let newPhrase = "";
+  const phrase=text.split("")
+  // console.log(phrase)
+  for(let i= 0; i<phrase.length ; i++){
+     replacePosition = searchletter(phrase[i].toLowerCase());
+     if (replacePosition != undefined) newPhrase += replacePosition + " ";
+     
+  }
+   console.log(newPhrase.toString());
+    return newPhrase.trim(); // to remove white spaces
+  }
+  
+  
+  function searchletter(letter){
+    const alpha=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    for(let i=0; i<= alpha.length ; i++) {
+       
+      if(alpha[i] == letter){
+  //       console.log(alpha[i], i , letter)
+        return i+1
+        }
+        
+      }
+      }

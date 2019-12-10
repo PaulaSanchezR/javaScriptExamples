@@ -595,3 +595,19 @@ The string has a length greater or equal to one and contains only letters from a
            sum=s.match(/[a-m]/gi).map((c) => c ) 
        return (s.length - sum.length )+"/" + s.length
       }
+      
+
+
+
+      /* Another way*/
+
+      function printerError(s) {
+        // your code
+        var count = 0;
+        for(var i = 0; i < s.length; i++) {
+          if (s[i] > "m") {
+            count++;
+          }
+        }
+        return count+"/"+s.length;
+    }

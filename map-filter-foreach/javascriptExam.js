@@ -613,7 +613,7 @@ The string has a length greater or equal to one and contains only letters from a
     }
 
 
-    // MAP FILTER FOREACH 
+    // MAP FILTER FOREACH SORT
 
      const companies=[
        {name: "Company one", category: "Finance", start: 1981 , end:2003 },
@@ -715,3 +715,41 @@ const sortedCompanies = companies.sort(function(company1,company2){
 
 // arrow way
 const sortcompanies = companies.sort((a,b)=> (a.start > b.start ? 1 : -1))
+
+const sortAges = ages.sort()
+//[12, 18, 20, 20, 26, 32, 33, 38, 42, 43, 46, 50, 52, 7]  
+// when it is a single digit you can not sort it
+ // to fix this 
+    const sortAges = ages.sort((a,b) => a-b)
+
+
+ //REDUX
+ 
+let ageSum = 0
+for(i=0; i > ages.length; i++){
+  ageSum += ages[i]
+}
+
+const ageSum = ages.reduce(function(total,age){
+  return total + age
+},0)
+
+
+const ageSum= ages.reduce((total,age) => total+age , 0)
+
+ //total year for all companys
+
+ const totalYear = companies.reduce(function(total, company){
+    return total + (company.end - company.start)
+ },0)
+
+const totalYear = companies.reduce((total,companies) => total + (companies.end - companies.start),0)
+
+
+//// CONBINE METHODS
+
+const combine= ages
+    .map(age => age *2) // multipli by 2
+    .filter(age => age > 40) // under 40
+    .sort((a,b) => (a-b))
+    .reduce((total,ages)=> total + ages)

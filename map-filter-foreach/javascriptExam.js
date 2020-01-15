@@ -665,6 +665,53 @@ const retaisCompanies = companies.filter(function(compani){
 })
 console.log(retaisCompanies)
 
-// Map
+
 
 const retaisCompanie=companies.filter(company => company.category =="Retail")
+// filter all companis form the 80'
+const companiesEiths= companies.filter(company => (company.start > 1980 && company.start < 1990))
+
+const companiesMorethanTen=companies.filter(company => (company.end - company.start) <= 10 )
+
+//Map create new array 
+// create array of companynames
+
+  const comapanyNames= companies.map(function(com){
+    return com.name
+  })
+  console.log(comapanyNames)
+  // maping the object and printing and array with a new format
+  const testMap= companies.map(function(com){
+    return `${company.name} [${com.start}-${com.end} ]`
+  })
+
+
+  const agesSquare =ages.map(age => Math.sqrt(age))
+
+  const agesMap=ages
+    .map(age => Math.sqrt(age))
+    .map(age => age * 2)
+
+//sort compare two values to orgazice the array
+// function way
+const sortedCompanies = companies.sort(function(company1,company2){
+  if(company1.start > company2.start){
+    return 1
+  }else {
+    return -1
+  }
+
+})
+
+// 0: {name: "Company eight", category: "Retail", start: 1981, end: 1986}
+// 1: {name: "Company one", category: "Finance", start: 1981, end: 2003}
+// 2: {name: "Company four", category: "Retail", start: 1985, end: 2000}
+// 3: {name: "Company six", category: "Finance", start: 1987, end: 2010}
+// 4: {name: "Company two", category: "Retail", start: 1992, end: 2008}
+// 5: {name: "Company tree", category: "Auto", start: 1999, end: 2007}
+// 6: {name: "Company five", category: "Technology", start: 2009, end: 2014}
+// 7: {name: "Company seven", category: "Auto", start: 2011, end: 2016}
+
+
+// arrow way
+const sortcompanies = companies.sort((a,b)=> (a.start > b.start ? 1 : -1))

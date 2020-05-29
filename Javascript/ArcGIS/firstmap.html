@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Intro to MapView - Create a 2D map</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.15/"></script>
+    <script>
+      require(["esri/Map", "esri/views/MapView","esri/views/SceneView"], 
+      function(Map, MapView, SceneView) {
+        let map = new Map({
+          basemap: "topo-vector"
+        });
+        // let view = new MapView({
+        //   container: "viewDiv", // Reference to the scene div created in step 5
+        //   map: map, // Reference to the map object created before the scene
+        //   zoom: 15 , // Sets zoom level based on level of detail (LOD)
+        //   center: [-75.442734, 6.280011] // Sets center point of view using longitude,latitude
+        // });
+        let scene= new SceneView({
+          container: "viewDiv", // Reference to the scene div created in step 5
+          map: map, // Reference to the map object created before the scene
+        //   scale: 110000,
+          zoom: 15, // Sets zoom level based on level of detail (LOD)
+          center: [-75.442734, 6.280011], // Sets center point of view using lo
+          extent:{  // is a rectangual  maparea of the view in this case you dont need a scale or zoom
+              xmax: -75.442734,  // Longitud
+              xmin: -75.452734,  // Longitud
+              ymax: 6.230011,    // Latitud
+              ymin: 6.330011,    // Latitud
+            //   spatialReference:102100 // this property owerride the center property
+          }
+        });
+        scene.on("click", function(){
+            // this code will allow the user to click in any part of the map and will
+            // show you the extent coordinators
+            alert("xmax: "+scene.extent.xmax + " xmin: " + scene.extent.xmin + 
+                  " ymax: "+scene.extent.ymax + " ymin: " + scene.extent.ymin)
+    //         alert(" map scale: " + scene.scale + " spatial Reference: " + scene.spatialReference.wkid)
+             })
+      });
+    </script>
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>

@@ -18,7 +18,7 @@
 // const arbol_monitoreados = treesPosition
 // console.log(treesPosition)
 
-     let myMap, myMapView, color;
+     let myMap, myMapView, color, myMarkerSymbol;
      require([
      "esri/Map",
      "esri/Graphic",
@@ -41,44 +41,64 @@
  let myMapView = new MapView({
    container: "viewDiv", // Reference to the scene div created in step 5
    map: myMap, // Reference to the map object created before the scene
-   zoom: 21 , // Sets zoom level based on level of detail (LOD)
+   zoom: 22 , // Sets zoom level based on level of detail (LOD)
    center: [-75.38338611,  6.35115278] // Sets center point of view using longitude,latitude
  });
  
- 
+//  console.log(treesPosition.length)
 //2-
 for (const property in treesPosition){
     
-   
 
-    const arbol_monitoreados= monitor.filter(arbol =>  console.log("monitor id = ",arbol.Id_Arbol," siempbre id =  " ,treesPosition[property].Id_Arbol))
 
-   // const arbol_monitoreados= monitor.filter(arbol => arbol.Id_Arbol === treesPosition[property].Id_Arbol)
+    const arbol_monitoreados= monitor.filter(arbol =>  arbol.Id_Arbol === treesPosition[property].Id_Arbol)
+
+    //console.log("monitor id = ",arbol.Id_Arbol," siempbre id =  " ,treesPosition[property].Id_Arbol))
+// console.log("trees position", treesPosition[property].Id_Arbol, "arbol monitoreado", arbol_monitoreados[0])
     
-  if(arbol_monitoreados.length >= 0){
-     // console.log(arbol_monitoreados.length)
-     // if(arbol_monitoreados[property].Estado === "Abierto"){
-     //console.log(arbol_monitoreados[property].Estado )
-      //   color_status= "yellow"
-     // }
-      // console.log(arbol_monitoreados[0])
-      
-  }
+// console.log(typeof arbol_monitoreados[0])
+// console.log(typeof treesPosition[0])
+
    
     let myPoint = new Point({
     x: treesPosition[property].Longitud,
     y: treesPosition[property].Latitud
     });
  
-//2-
- let myMarkerSymbol = new SimpleMarkerSymbol({
-    size: 5,
-  //  color: arbol_monitoreados[property].Estado === "Abierto"  ? [184, 4, 84]: [249,237,159],  
-    outline: {
-    color: [219, 219, 219],
-    width: 1
+//2
+
+if ( arbol_monitoreados[0] === undefined){
+    myMarkerSymbol = new SimpleMarkerSymbol({
+        color: [39, 174, 96],  
+        outline: {
+            color: [219, 219, 219],
+            width: 1
+        }
+    });
+} else {
+    if(arbol_monitoreados[0].Estado==="Abierto"){
+        console.log("abierto =====",treesPosition[property].Id_Arbol)
+        myMarkerSymbol = new SimpleMarkerSymbol({
+            color: [211, 84, 0],  // color rojo  
+            outline: {
+                color: [211, 84, 0],
+                width: 1
+            }
+        });
+    } else{
+       
+        console.log("cerrado =====",treesPosition[property].Id_Arbol)
+        myMarkerSymbol = new SimpleMarkerSymbol({
+            color: [244, 208, 63],  
+            outline: {
+            color: [211, 84, 0],
+            width: 1
+            }
+         });
     }
- });
+    
+   
+} 
  //3-
  let myGraphic = new Graphic({
     geometry: myPoint,

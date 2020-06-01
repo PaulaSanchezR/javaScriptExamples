@@ -4,22 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>set Camera</title>
+    <title>set View Point</title>
     <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.15/"></script>
  
 <script>
-        var myMap, mySceneView;
+        
+        let myMap, mySceneView;
+
         require([
         "esri/Map",
+        "esri/geometry/Point",
+        "esri/Viewpoint",
         "esri/views/SceneView",
         "dojo/domReady!"
-    ],
-        function(
+        ], function(
         Map,
+        Point,
+        Viewpoint,
         SceneView
         ) {
-       
+
+        let myPoint = new Point ({
+            longitude:-75.38338611,
+            latitude:6.35115278,
+            z: 100
+            });
+
+        let myViewPoint = new Viewpoint ({
+            camera: {
+            position: myPoint,
+            tilt: 80,
+            heading: 330
+            },
+            });
+        
         myMap = new Map({
             basemap: "national-geographic",
             ground: "world-elevation"
@@ -28,12 +47,17 @@
         mySceneView = new SceneView({
             container: "map1",
             map: myMap,
-            camera:{
-                position: [-75.38338611,  6.35115278, 1000], // elevation to 1000 mts
-                tilt:80, // whent this is 90 means the camara is horizontal
-                heading:330 //is from 0 to 360, 360 represents the north direccion
-            }
-        });
+            viewpoint: myViewPoint
+            });
+
+            // camera:{
+            //     position: [-75.38338611,  6.35115278, 1000], // elevation to 1000 mts
+            //     tilt:80, // whent this is 90 means the camara is horizontal
+            //     heading:330 //is from 0 to 360, 360 represents the north direccion
+            // }
+       
+
+
        
         });
        </script>

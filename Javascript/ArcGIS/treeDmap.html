@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>set View Point</title>
+    <title>Animate to a  View Point</title>
     <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.15/"></script>
  
@@ -33,9 +33,9 @@
 
         let myViewPoint = new Viewpoint ({
             camera: {
-            position: myPoint,
-            tilt: 80,
-            heading: 330
+                    position: myPoint,
+                    tilt: 80,
+                    heading: 330
             },
             });
         
@@ -56,8 +56,18 @@
             //     heading:330 //is from 0 to 360, 360 represents the north direccion
             // }
        
-
-
+         mySceneView.on("click" , function(){
+             // the on click event allow me to go to another location with the viewpoint. right now is the position is the same
+             //but you can put any other location and wiht the click it will go to that location
+             myViewPoint2 = new Viewpoint({
+                camera: {
+                    position:  [-75.38338611,  6.35115278, 500],
+                    tilt: 80,
+                    heading: 110
+            },
+             })
+           mySceneView.goTo(myViewPoint2)  
+         })
        
         });
        </script>

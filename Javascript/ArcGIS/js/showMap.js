@@ -9,16 +9,10 @@
 // );
 // console.log(filtered);
 
+     let myMap, myMapView, myMarkerSymbol;
+     let colorNewBackgroud = [] 
+     let colorNewOutline = []
 
-// var arr = [1,2,3,4],
-//     brr = [2,4],
-//     res = arr.filter(f => !brr.includes(f));
-// console.log(res);
-
-// const arbol_monitoreados = treesPosition
-// console.log(treesPosition)
-
-     let myMap, myMapView, color, myMarkerSymbol;
      require([
      "esri/Map",
      "esri/Graphic",
@@ -45,61 +39,43 @@
    center: [-75.38338611,  6.35115278] // Sets center point of view using longitude,latitude
  });
  
-//  console.log(treesPosition.length)
-//2-
+
 for (const property in treesPosition){
-    
-
-
+    // Generate a new array of objects with undefied if does not existe the Id.Arbol
     const arbol_monitoreados= monitor.filter(arbol =>  arbol.Id_Arbol === treesPosition[property].Id_Arbol)
 
-    //console.log("monitor id = ",arbol.Id_Arbol," siempbre id =  " ,treesPosition[property].Id_Arbol))
-// console.log("trees position", treesPosition[property].Id_Arbol, "arbol monitoreado", arbol_monitoreados[0])
-    
-// console.log(typeof arbol_monitoreados[0])
-// console.log(typeof treesPosition[0])
-
-   
     let myPoint = new Point({
     x: treesPosition[property].Longitud,
     y: treesPosition[property].Latitud
     });
  
-//2
+   // If is undefined is because does not exist in siembra table, it is healthy
 
-if ( arbol_monitoreados[0] === undefined){
-    myMarkerSymbol = new SimpleMarkerSymbol({
-        color: [39, 174, 96],  
-        outline: {
-            color: [219, 219, 219],
-            width: 1
-        }
-    });
-} else {
-    if(arbol_monitoreados[0].Estado==="Abierto"){
-        console.log("abierto =====",treesPosition[property].Id_Arbol)
+
+    if ( arbol_monitoreados[0] === undefined){
+            colorNewBackgroud= [39, 174, 96]  // green
+            colorNewOutline=[219, 219, 219]  // green
+        }else{ // else is the table monitor but the state could be Close or Open
+            if(arbol_monitoreados[0].Estado==="Abierto"){
+                colorNewBackgroud= [142, 68, 173]
+                colorNewOutline=[219, 219, 219] // white
+                
+            }else{
+                colorNewBackgroud=[244, 208, 63]  //amarillo
+                colorNewOutline=[211, 84, 0]// rojo
+        }    
+    }    
+
+
         myMarkerSymbol = new SimpleMarkerSymbol({
-            color: [211, 84, 0],  // color rojo  
+            color: colorNewBackgroud,  // green
             outline: {
-                color: [211, 84, 0],
+                color: colorNewOutline, // white
                 width: 1
             }
         });
-    } else{
-       
-        console.log("cerrado =====",treesPosition[property].Id_Arbol)
-        myMarkerSymbol = new SimpleMarkerSymbol({
-            color: [244, 208, 63],  
-            outline: {
-            color: [211, 84, 0],
-            width: 1
-            }
-         });
-    }
-    
-   
-} 
- //3-
+
+
  let myGraphic = new Graphic({
     geometry: myPoint,
     symbol: myMarkerSymbol
